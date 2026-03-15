@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PosterAI — Early Access</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Epilogue:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --text: #1a1a18;
+    --text-muted: #7a7970;
+    --text-faint: #b0afa8;
+    --border: rgba(26,26,24,0.12);
+    --border-strong: rgba(26,26,24,0.35);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 8vw, 52px);
+    font-weight: 300;
+    line-height: 1.08;
+    margin-bottom: 1rem;
+  }
+
+  h1 em {
+    font-style: italic;
+  }
+
+  .sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
+
+  .divider {
+    width: 28px;
+    height: 0.5px;
+    background: var(--border-strong);
+    margin-bottom: 2rem;
+  }
+
+  .field {
+    margin-bottom: 1.75rem;
+  }
+
+  label {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+  }
+
+  input[type="email"],
+  input[type="text"] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid var(--border-strong);
+    padding: 8px 0;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+
+  input:focus {
+    border-bottom-color: var(--text);
+  }
+
+  input::placeholder {
+    color: var(--text-faint);
+  }
+
+  .style-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .option-btn {
+    border: 0.5px solid var(--border);
+    background: transparent;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+
+  .option-btn span {
+    display: block;
+    font-size: 10px;
+    opacity: 0.55;
+    margin-top: 2px;
+  }
+
+  .option-btn:hover {
+    border-color: var(--border-strong);
+    color: var(--text);
+  }
+
+  .option-btn.active {
+    border-color: var(--text);
+    color: var(--text);
+    background: rgba(26,26,24,0.04);
+  }
+
+  .size-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .size-btn {
+    border: 0.5px solid var(--border);
+    background: transparent;
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .size-btn:hover {
+    border-color: var(--border-strong);
+    color: var(--text);
+  }
+
+  .size-btn.active {
+    border-color: var(--text);
+    color: var(--text);
+    background: rgba(26,26,24,0.04);
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: opacity 0.2s;
+  }
+
+  .submit-btn:hover { opacity: 0.8; }
+  .submit-btn:active { opacity: 0.65; }
+  .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .note {
+    font-size: 11px;
+    color: var(--text-faint);
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 300;
+  }
+
+  .error-msg {
+    font-size: 11px;
+    color: #c0392b;
+    margin-top: 6px;
+    display: none;
+  }
+
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 3rem 0;
+  }
+
+  .success-state h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .success-state p {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div id="form-state">
+    <p class="eyebrow">PosterAI — early access</p>
+    <h1>Art for your<br><em>blank walls.</em></h1>
+    <p class="sub">Personalized AI-generated art posters — pick a style, pick a mood, get a print-ready file. No design skills needed.</p>
+    <div class="divider"></div>
+
+    <form id="pa-form" action="https://formspree.io/f/xnnqkojw" method="POST">
+
+      <div class="field">
+        <label for="email">Your email</label>
+        <input type="email" id="email" name="email" placeholder="name@example.com" required />
+        <p class="error-msg" id="email-error">Please enter a valid email address.</p>
+      </div>
+
+      <div class="field">
+        <label>Style you're most interested in</label>
+        <div class="style-grid">
+          <button type="button" class="option-btn" data-val="Minimalist painting" onclick="selectStyle(this)">
+            Minimalist painting
+            <span>clean lines, negative space</span>
+          </button>
+          <button type="button" class="option-btn" data-val="Organic abstraction" onclick="selectStyle(this)">
+            Organic abstraction
+            <span>flowing forms, natural</span>
+          </button>
+          <button type="button" class="option-btn" data-val="Contemporary impressionism" onclick="selectStyle(this)">
+            Contemporary impressionism
+            <span>painterly, atmospheric</span>
+          </button>
+          <button type="button" class="option-btn" data-val="Mid-century modern" onclick="selectStyle(this)">
+            Mid-century modern
+            <span>retro, graphic, bold</span>
+          </button>
+        </div>
+        <input type="hidden" name="style" id="style-val" value="" />
+      </div>
+
+      <div class="field">
+        <label>Preferred poster size</label>
+        <div class="size-row">
+          <button type="button" class="size-btn" data-val="A4" onclick="selectSize(this)">A4</button>
+          <button type="button" class="size-btn" data-val="A3" onclick="selectSize(this)">A3</button>
+          <button type="button" class="size-btn" data-val="A2" onclick="selectSize(this)">A2</button>
+          <button type="button" class="size-btn" data-val="50×70 cm" onclick="selectSize(this)">50×70 cm</button>
+          <button type="button" class="size-btn" data-val="70×100 cm" onclick="selectSize(this)">70×100 cm</button>
+        </div>
+        <input type="hidden" name="size" id="size-val" value="" />
+      </div>
+
+      <div class="field">
+        <label for="note">Anything else? <span style="opacity:0.5;text-transform:none;letter-spacing:0;font-size:10px;">(optional)</span></label>
+        <input type="text" id="note" name="note" placeholder="e.g. bedroom wall, living room, gift for someone..." />
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">Get early access</button>
+      <p class="note">No spam. You'll be among the first to try the platform.</p>
+    </form>
+  </div>
+
+  <div class="success-state" id="success-state">
+    <h2>You're on the list.</h2>
+    <p>We'll be in touch as soon as early access opens.<br>Thank you for your interest.</p>
+  </div>
+</div>
+
+<script>
+  function selectStyle(el) {
+    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('style-val').value = el.dataset.val;
+  }
+
+  function selectSize(el) {
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('size-val').value = el.dataset.val;
+  }
+
+  document.getElementById('pa-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const emailErr = document.getElementById('email-error');
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailErr.style.display = 'block';
+      document.getElementById('email').focus();
+      return;
+    }
+    emailErr.style.display = 'none';
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      const formData = new FormData(this);
+      const response = await fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        document.getElementById('form-state').style.display = 'none';
+        document.getElementById('success-state').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Get early access';
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Get early access';
+      alert('Something went wrong. Please try again.');
+    }
+  });
+</script>
+</body>
+</html>
