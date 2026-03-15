@@ -10,17 +10,20 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #f8f7f4;
+    --bg: #f5f3ef;
     --surface: #ffffff;
     --text: #1a1a18;
     --text-muted: #7a7970;
     --text-faint: #b0afa8;
-    --border: rgba(26,26,24,0.12);
-    --border-strong: rgba(26,26,24,0.35);
+    --border: rgba(26,26,24,0.10);
+    --border-strong: rgba(26,26,24,0.28);
   }
 
   body {
     background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at 15% 15%, rgba(200,195,182,0.35) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 85%, rgba(185,178,165,0.25) 0%, transparent 55%);
     color: var(--text);
     font-family: 'Epilogue', sans-serif;
     font-weight: 300;
@@ -28,12 +31,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem 1rem;
+    padding: 2.5rem 1.25rem;
   }
 
   .container {
     width: 100%;
     max-width: 480px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 2.5rem 2.25rem;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.04),
+      0 4px 24px rgba(0,0,0,0.07),
+      0 0 0 0.5px var(--border);
   }
 
   .eyebrow {
@@ -42,38 +55,52 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--text-faint);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 0.5px;
+    background: var(--text-faint);
+    flex-shrink: 0;
   }
 
   h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 8vw, 52px);
+    font-size: clamp(38px, 8vw, 50px);
     font-weight: 300;
-    line-height: 1.08;
-    margin-bottom: 1rem;
+    line-height: 1.1;
+    margin-bottom: 0.875rem;
+    letter-spacing: -0.01em;
   }
 
   h1 em {
     font-style: italic;
+    color: var(--text-muted);
   }
 
   .sub {
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 300;
     color: var(--text-muted);
-    line-height: 1.65;
-    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
   }
 
   .divider {
-    width: 28px;
+    width: 100%;
     height: 0.5px;
-    background: var(--border-strong);
+    background: var(--border);
     margin-bottom: 2rem;
   }
 
   .field {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.625rem;
   }
 
   label {
@@ -83,7 +110,27 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--text-faint);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  .input-wrap {
+    position: relative;
+  }
+
+  .input-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--text);
+    transition: width 0.3s ease;
+    pointer-events: none;
+  }
+
+  .input-wrap:focus-within::after {
+    width: 100%;
   }
 
   input[type="email"],
@@ -92,19 +139,14 @@
     background: transparent;
     border: none;
     border-bottom: 0.5px solid var(--border-strong);
-    padding: 8px 0;
+    padding: 9px 0;
     font-family: 'Epilogue', sans-serif;
-    font-size: 15px;
+    font-size: 14.5px;
     font-weight: 300;
     color: var(--text);
     outline: none;
-    transition: border-color 0.2s;
     border-radius: 0;
     -webkit-appearance: none;
-  }
-
-  input:focus {
-    border-bottom-color: var(--text);
   }
 
   input::placeholder {
@@ -114,50 +156,71 @@
   .style-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 7px;
   }
 
   .option-btn {
-    border: 0.5px solid var(--border);
+    border: 1px solid var(--border);
     background: transparent;
-    border-radius: 8px;
-    padding: 10px 12px;
+    border-radius: 10px;
+    padding: 11px 13px;
     font-family: 'Epilogue', sans-serif;
     font-size: 12px;
     font-weight: 300;
     color: var(--text-muted);
     cursor: pointer;
     text-align: left;
-    transition: all 0.15s;
+    transition: border-color 0.18s, background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.18s;
     line-height: 1.4;
+    display: flex;
+    flex-direction: column;
   }
 
-  .option-btn span {
+  .style-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-bottom: 8px;
+    transition: opacity 0.18s;
+  }
+
+  .option-btn .style-sub {
     display: block;
     font-size: 10px;
-    opacity: 0.55;
-    margin-top: 2px;
+    opacity: 0.5;
+    margin-top: 3px;
   }
+
+  [data-val="Minimalist painting"] .style-dot { background: #c8c4bc; }
+  [data-val="Organic abstraction"] .style-dot  { background: #9cad99; }
+  [data-val="Contemporary impressionism"] .style-dot { background: #b5a89c; }
+  [data-val="Mid-century modern"] .style-dot   { background: #d4a574; }
 
   .option-btn:hover {
     border-color: var(--border-strong);
     color: var(--text);
+    background: rgba(26,26,24,0.025);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
 
   .option-btn.active {
     border-color: var(--text);
     color: var(--text);
     background: rgba(26,26,24,0.04);
+    transform: none;
+    box-shadow: none;
   }
 
   .size-row {
     display: flex;
-    gap: 8px;
+    gap: 7px;
     flex-wrap: wrap;
   }
 
   .size-btn {
-    border: 0.5px solid var(--border);
+    border: 1px solid var(--border);
     background: transparent;
     border-radius: 8px;
     padding: 7px 14px;
@@ -166,18 +229,19 @@
     font-weight: 300;
     color: var(--text-muted);
     cursor: pointer;
-    transition: all 0.15s;
+    transition: border-color 0.18s, background 0.18s, color 0.18s;
   }
 
   .size-btn:hover {
     border-color: var(--border-strong);
     color: var(--text);
+    background: rgba(26,26,24,0.025);
   }
 
   .size-btn.active {
     border-color: var(--text);
     color: var(--text);
-    background: rgba(26,26,24,0.04);
+    background: rgba(26,26,24,0.05);
   }
 
   .submit-btn {
@@ -185,21 +249,31 @@
     background: var(--text);
     color: var(--bg);
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 15px;
     font-family: 'Epilogue', sans-serif;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 400;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     cursor: pointer;
     margin-top: 2rem;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
   }
 
-  .submit-btn:hover { opacity: 0.8; }
-  .submit-btn:active { opacity: 0.65; }
-  .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .submit-btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  }
+
+  .submit-btn:active {
+    opacity: 0.7;
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 
   .note {
     font-size: 11px;
@@ -211,7 +285,7 @@
 
   .error-msg {
     font-size: 11px;
-    color: #c0392b;
+    color: #b94040;
     margin-top: 6px;
     display: none;
   }
@@ -219,7 +293,31 @@
   .success-state {
     display: none;
     text-align: center;
-    padding: 3rem 0;
+  }
+
+  .success-state .card {
+    padding: 3rem 2.25rem;
+  }
+
+  .success-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(26,26,24,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+
+  .success-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--text);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .success-state h2 {
@@ -227,81 +325,103 @@
     font-size: 38px;
     font-weight: 300;
     font-style: italic;
-    margin-bottom: 1rem;
+    margin-bottom: 0.875rem;
   }
 
   .success-state p {
-    font-size: 14px;
+    font-size: 13.5px;
     color: var(--text-muted);
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      padding: 2rem 1.5rem;
+      border-radius: 14px;
+    }
   }
 </style>
 </head>
 <body>
 <div class="container">
   <div id="form-state">
-    <p class="eyebrow">PosterAI — early access</p>
-    <h1>Art for your<br><em>blank walls.</em></h1>
-    <p class="sub">Personalized AI-generated art posters — pick a style, pick a mood, get a print-ready file. No design skills needed.</p>
-    <div class="divider"></div>
+    <div class="card">
+      <p class="eyebrow">PosterAI — early access</p>
+      <h1>Art for your<br><em>blank walls.</em></h1>
+      <p class="sub">Personalized AI-generated art posters — pick a style, pick a mood, get a print-ready file. No design skills needed.</p>
+      <div class="divider"></div>
 
-    <form id="pa-form" action="https://formspree.io/f/xvzwbdbr" method="POST">
+      <form id="pa-form" action="https://formspree.io/f/xvzwbdbr" method="POST">
 
-      <div class="field">
-        <label for="email">Your email</label>
-        <input type="email" id="email" name="email" placeholder="name@example.com" required />
-        <p class="error-msg" id="email-error">Please enter a valid email address.</p>
-      </div>
-
-      <div class="field">
-        <label>Style you're most interested in</label>
-        <div class="style-grid">
-          <button type="button" class="option-btn" data-val="Minimalist painting" onclick="selectStyle(this)">
-            Minimalist painting
-            <span>clean lines, negative space</span>
-          </button>
-          <button type="button" class="option-btn" data-val="Organic abstraction" onclick="selectStyle(this)">
-            Organic abstraction
-            <span>flowing forms, natural</span>
-          </button>
-          <button type="button" class="option-btn" data-val="Contemporary impressionism" onclick="selectStyle(this)">
-            Contemporary impressionism
-            <span>painterly, atmospheric</span>
-          </button>
-          <button type="button" class="option-btn" data-val="Mid-century modern" onclick="selectStyle(this)">
-            Mid-century modern
-            <span>retro, graphic, bold</span>
-          </button>
+        <div class="field">
+          <label for="email">Your email</label>
+          <div class="input-wrap">
+            <input type="email" id="email" name="email" placeholder="name@example.com" required />
+          </div>
+          <p class="error-msg" id="email-error">Please enter a valid email address.</p>
         </div>
-        <input type="hidden" name="style" id="style-val" value="" />
-      </div>
 
-      <div class="field">
-        <label>Preferred poster size</label>
-        <div class="size-row">
-          <button type="button" class="size-btn" data-val="A4" onclick="selectSize(this)">A4</button>
-          <button type="button" class="size-btn" data-val="A3" onclick="selectSize(this)">A3</button>
-          <button type="button" class="size-btn" data-val="A2" onclick="selectSize(this)">A2</button>
-          <button type="button" class="size-btn" data-val="50×70 cm" onclick="selectSize(this)">50×70 cm</button>
-          <button type="button" class="size-btn" data-val="70×100 cm" onclick="selectSize(this)">70×100 cm</button>
+        <div class="field">
+          <label>Style you're most interested in</label>
+          <div class="style-grid">
+            <button type="button" class="option-btn" data-val="Minimalist painting" onclick="selectStyle(this)">
+              <span class="style-dot"></span>
+              Minimalist painting
+              <span class="style-sub">clean lines, negative space</span>
+            </button>
+            <button type="button" class="option-btn" data-val="Organic abstraction" onclick="selectStyle(this)">
+              <span class="style-dot"></span>
+              Organic abstraction
+              <span class="style-sub">flowing forms, natural</span>
+            </button>
+            <button type="button" class="option-btn" data-val="Contemporary impressionism" onclick="selectStyle(this)">
+              <span class="style-dot"></span>
+              Contemporary impressionism
+              <span class="style-sub">painterly, atmospheric</span>
+            </button>
+            <button type="button" class="option-btn" data-val="Mid-century modern" onclick="selectStyle(this)">
+              <span class="style-dot"></span>
+              Mid-century modern
+              <span class="style-sub">retro, graphic, bold</span>
+            </button>
+          </div>
+          <input type="hidden" name="style" id="style-val" value="" />
         </div>
-        <input type="hidden" name="size" id="size-val" value="" />
-      </div>
 
-      <div class="field">
-        <label for="note">Anything else? <span style="opacity:0.5;text-transform:none;letter-spacing:0;font-size:10px;">(optional)</span></label>
-        <input type="text" id="note" name="note" placeholder="e.g. bedroom wall, living room, gift for someone..." />
-      </div>
+        <div class="field">
+          <label>Preferred poster size</label>
+          <div class="size-row">
+            <button type="button" class="size-btn" data-val="A4" onclick="selectSize(this)">A4</button>
+            <button type="button" class="size-btn" data-val="A3" onclick="selectSize(this)">A3</button>
+            <button type="button" class="size-btn" data-val="A2" onclick="selectSize(this)">A2</button>
+            <button type="button" class="size-btn" data-val="50×70 cm" onclick="selectSize(this)">50×70 cm</button>
+            <button type="button" class="size-btn" data-val="70×100 cm" onclick="selectSize(this)">70×100 cm</button>
+          </div>
+          <input type="hidden" name="size" id="size-val" value="" />
+        </div>
 
-      <button type="submit" class="submit-btn" id="submit-btn">Get early access</button>
-      <p class="note">No spam. You'll be among the first to try the platform.</p>
-    </form>
+        <div class="field">
+          <label for="note">Anything else? <span style="opacity:0.5;text-transform:none;letter-spacing:0;font-size:10px;">(optional)</span></label>
+          <div class="input-wrap">
+            <input type="text" id="note" name="note" placeholder="e.g. bedroom wall, living room, gift for someone..." />
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">Get early access</button>
+        <p class="note">No spam. You'll be among the first to try the platform.</p>
+      </form>
+    </div>
   </div>
 
   <div class="success-state" id="success-state">
-    <h2>You're on the list.</h2>
-    <p>We'll be in touch as soon as early access opens.<br>Thank you for your interest.</p>
+    <div class="card">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2>You're on the list.</h2>
+      <p>We'll be in touch as soon as early access opens.<br>Thank you for your interest.</p>
+    </div>
   </div>
 </div>
 
