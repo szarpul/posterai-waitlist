@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PosterAI — Early Access</title>
+<title>PosterAI — Wczesny dostęp</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Epilogue:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -192,9 +192,9 @@
     margin-top: 3px;
   }
 
-  [data-val="Minimalist painting"] .style-dot { background: #c8c4bc; }
-  [data-val="Organic abstraction"] .style-dot  { background: #9cad99; }
-  [data-val="Contemporary impressionism"] .style-dot { background: #b5a89c; }
+  [data-val="Malarstwo minimalistyczne"] .style-dot { background: #c8c4bc; }
+  [data-val="Organiczna abstrakcja"] .style-dot  { background: #9cad99; }
+  [data-val="Współczesny impresjonizm"] .style-dot { background: #b5a89c; }
   [data-val="Mid-century modern"] .style-dot   { background: #d4a574; }
 
   .option-btn:hover {
@@ -347,50 +347,50 @@
 <div class="container">
   <div id="form-state">
     <div class="card">
-      <p class="eyebrow">PosterAI — early access</p>
-      <h1>Art for your<br><em>blank walls.</em></h1>
-      <p class="sub">Personalized AI-generated art posters — pick a style, pick a mood, get a print-ready file. No design skills needed.</p>
+      <p class="eyebrow">PosterAI — wczesny dostęp</p>
+      <h1>Sztuka dla Twoich<br><em>pustych ścian.</em></h1>
+      <p class="sub">Spersonalizowane plakaty generowane przez AI — wybierz styl, wybierz nastrój, otrzymaj plik gotowy do druku. Bez umiejętności projektowania.</p>
       <div class="divider"></div>
 
       <form id="pa-form" action="https://formspree.io/f/xvzwbdbr" method="POST">
 
         <div class="field">
-          <label for="email">Your email</label>
+          <label for="email">Twój adres e-mail</label>
           <div class="input-wrap">
-            <input type="email" id="email" name="email" placeholder="name@example.com" required />
+            <input type="email" id="email" name="email" placeholder="imie@example.com" required />
           </div>
-          <p class="error-msg" id="email-error">Please enter a valid email address.</p>
+          <p class="error-msg" id="email-error">Podaj prawidłowy adres e-mail.</p>
         </div>
 
         <div class="field">
-          <label>Style you're most interested in</label>
+          <label>Styl, który Cię najbardziej interesuje</label>
           <div class="style-grid">
-            <button type="button" class="option-btn" data-val="Minimalist painting" onclick="selectStyle(this)">
+            <button type="button" class="option-btn" data-val="Malarstwo minimalistyczne" onclick="selectStyle(this)">
               <span class="style-dot"></span>
-              Minimalist painting
-              <span class="style-sub">clean lines, negative space</span>
+              Malarstwo minimalistyczne
+              <span class="style-sub">czyste linie, negatywna przestrzeń</span>
             </button>
-            <button type="button" class="option-btn" data-val="Organic abstraction" onclick="selectStyle(this)">
+            <button type="button" class="option-btn" data-val="Organiczna abstrakcja" onclick="selectStyle(this)">
               <span class="style-dot"></span>
-              Organic abstraction
-              <span class="style-sub">flowing forms, natural</span>
+              Organiczna abstrakcja
+              <span class="style-sub">płynne formy, naturalność</span>
             </button>
-            <button type="button" class="option-btn" data-val="Contemporary impressionism" onclick="selectStyle(this)">
+            <button type="button" class="option-btn" data-val="Współczesny impresjonizm" onclick="selectStyle(this)">
               <span class="style-dot"></span>
-              Contemporary impressionism
-              <span class="style-sub">painterly, atmospheric</span>
+              Współczesny impresjonizm
+              <span class="style-sub">malarski, nastrojowy</span>
             </button>
             <button type="button" class="option-btn" data-val="Mid-century modern" onclick="selectStyle(this)">
               <span class="style-dot"></span>
               Mid-century modern
-              <span class="style-sub">retro, graphic, bold</span>
+              <span class="style-sub">retro, graficzny, śmiały</span>
             </button>
           </div>
           <input type="hidden" name="style" id="style-val" value="" />
         </div>
 
         <div class="field">
-          <label>Preferred poster size</label>
+          <label>Preferowany rozmiar plakatu</label>
           <div class="size-row">
             <button type="button" class="size-btn" data-val="A4" onclick="selectSize(this)">A4</button>
             <button type="button" class="size-btn" data-val="A3" onclick="selectSize(this)">A3</button>
@@ -402,14 +402,14 @@
         </div>
 
         <div class="field">
-          <label for="note">Anything else? <span style="opacity:0.5;text-transform:none;letter-spacing:0;font-size:10px;">(optional)</span></label>
+          <label for="note">Coś jeszcze? <span style="opacity:0.5;text-transform:none;letter-spacing:0;font-size:10px;">(opcjonalnie)</span></label>
           <div class="input-wrap">
-            <input type="text" id="note" name="note" placeholder="e.g. bedroom wall, living room, gift for someone..." />
+            <input type="text" id="note" name="note" placeholder="np. ściana w sypialni, salon, prezent dla kogoś..." />
           </div>
         </div>
 
-        <button type="submit" class="submit-btn" id="submit-btn">Get early access</button>
-        <p class="note">No spam. You'll be among the first to try the platform.</p>
+        <button type="submit" class="submit-btn" id="submit-btn">Uzyskaj wczesny dostęp</button>
+        <p class="note">Zero spamu. Będziesz wśród pierwszych, którzy wypróbują platformę.</p>
       </form>
     </div>
   </div>
@@ -419,8 +419,8 @@
       <div class="success-icon">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <h2>You're on the list.</h2>
-      <p>We'll be in touch as soon as early access opens.<br>Thank you for your interest.</p>
+      <h2>Jesteś na liście.</h2>
+      <p>Skontaktujemy się z Tobą, gdy tylko otworzymy wczesny dostęp.<br>Dziękujemy za zainteresowanie.</p>
     </div>
   </div>
 </div>
@@ -453,7 +453,7 @@
 
     const btn = document.getElementById('submit-btn');
     btn.disabled = true;
-    btn.textContent = 'Sending...';
+    btn.textContent = 'Wysyłanie...';
 
     try {
       const formData = new FormData(this);
@@ -468,8 +468,8 @@
         document.getElementById('success-state').style.display = 'block';
       } else {
         btn.disabled = false;
-        btn.textContent = 'Get early access';
-        alert('Something went wrong. Please try again.');
+        btn.textContent = 'Uzyskaj wczesny dostęp';
+        alert('Coś poszło nie tak. Spróbuj ponownie.');
       }
     } catch (err) {
       btn.disabled = false;
