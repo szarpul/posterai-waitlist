@@ -49,6 +49,37 @@
       0 0 0 0.5px var(--border);
   }
 
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+  }
+
+  .lang-btn {
+    background: none;
+    border: none;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--text-faint);
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.18s;
+    text-transform: uppercase;
+  }
+
+  .lang-btn:hover { color: var(--text-muted); }
+  .lang-btn.active { color: var(--text); }
+
+  .lang-sep {
+    font-size: 10px;
+    color: var(--border-strong);
+    user-select: none;
+  }
+
   .eyebrow {
     font-size: 10px;
     font-weight: 400;
@@ -347,15 +378,21 @@
 <div class="container">
   <div id="form-state">
     <div class="card">
-      <p class="eyebrow">PosterAI — early access</p>
-      <h1>Art for your<br><em>blank walls.</em></h1>
-      <p class="sub">Personalized AI-generated art posters — pick a style, pick a mood, get a print-ready file. No design skills needed.</p>
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')" id="lang-en">EN</button>
+        <span class="lang-sep">·</span>
+        <button class="lang-btn" onclick="setLang('pl')" id="lang-pl">PL</button>
+      </div>
+
+      <p class="eyebrow" id="eyebrow">PosterAI — early access</p>
+      <h1><span id="h1-line1">Art for your</span><br><em id="h1-em">blank walls.</em></h1>
+      <p class="sub" id="sub">Personalized AI-generated art posters — pick a style, pick a mood, get a print-ready file. No design skills needed.</p>
       <div class="divider"></div>
 
       <form id="pa-form" action="https://formspree.io/f/xvzwbdbr" method="POST">
 
         <div class="field">
-          <label for="email">Your email</label>
+          <label for="email" id="label-email">Your email</label>
           <div class="input-wrap">
             <input type="email" id="email" name="email" placeholder="name@example.com" required />
           </div>
@@ -363,26 +400,26 @@
         </div>
 
         <div class="field">
-          <label>Style you're most interested in</label>
+          <label id="label-style">Style you're most interested in</label>
           <div class="style-grid">
             <button type="button" class="option-btn" data-val="Minimalist painting" onclick="selectStyle(this)">
               <span class="style-dot"></span>
-              Minimalist painting
+              <span class="style-name">Minimalist painting</span>
               <span class="style-sub">clean lines, negative space</span>
             </button>
             <button type="button" class="option-btn" data-val="Organic abstraction" onclick="selectStyle(this)">
               <span class="style-dot"></span>
-              Organic abstraction
+              <span class="style-name">Organic abstraction</span>
               <span class="style-sub">flowing forms, natural</span>
             </button>
             <button type="button" class="option-btn" data-val="Contemporary impressionism" onclick="selectStyle(this)">
               <span class="style-dot"></span>
-              Contemporary impressionism
+              <span class="style-name">Contemporary impressionism</span>
               <span class="style-sub">painterly, atmospheric</span>
             </button>
             <button type="button" class="option-btn" data-val="Mid-century modern" onclick="selectStyle(this)">
               <span class="style-dot"></span>
-              Mid-century modern
+              <span class="style-name">Mid-century modern</span>
               <span class="style-sub">retro, graphic, bold</span>
             </button>
           </div>
@@ -390,7 +427,7 @@
         </div>
 
         <div class="field">
-          <label>Preferred poster size</label>
+          <label id="label-size">Preferred poster size</label>
           <div class="size-row">
             <button type="button" class="size-btn" data-val="A4" onclick="selectSize(this)">A4</button>
             <button type="button" class="size-btn" data-val="A3" onclick="selectSize(this)">A3</button>
@@ -402,14 +439,14 @@
         </div>
 
         <div class="field">
-          <label for="note">Anything else? <span style="opacity:0.5;text-transform:none;letter-spacing:0;font-size:10px;">(optional)</span></label>
+          <label for="note" id="label-note">Anything else? <span id="label-note-opt" style="opacity:0.5;text-transform:none;letter-spacing:0;font-size:10px;">(optional)</span></label>
           <div class="input-wrap">
             <input type="text" id="note" name="note" placeholder="e.g. bedroom wall, living room, gift for someone..." />
           </div>
         </div>
 
         <button type="submit" class="submit-btn" id="submit-btn">Get early access</button>
-        <p class="note">No spam. You'll be among the first to try the platform.</p>
+        <p class="note" id="form-note">No spam. You'll be among the first to try the platform.</p>
       </form>
     </div>
   </div>
@@ -419,13 +456,102 @@
       <div class="success-icon">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <h2>You're on the list.</h2>
-      <p>We'll be in touch as soon as early access opens.<br>Thank you for your interest.</p>
+      <h2 id="success-h2">You're on the list.</h2>
+      <p id="success-p">We'll be in touch as soon as early access opens.<br>Thank you for your interest.</p>
     </div>
   </div>
 </div>
 
 <script>
+  const translations = {
+    en: {
+      pageTitle: 'PosterAI — Early Access',
+      eyebrow: 'PosterAI — early access',
+      h1line1: 'Art for your',
+      h1em: 'blank walls.',
+      sub: 'Personalized AI-generated art posters — pick a style, pick a mood, get a print-ready file. No design skills needed.',
+      labelEmail: 'Your email',
+      emailPlaceholder: 'name@example.com',
+      emailError: 'Please enter a valid email address.',
+      labelStyle: "Style you're most interested in",
+      styles: [
+        { name: 'Minimalist painting', sub: 'clean lines, negative space' },
+        { name: 'Organic abstraction', sub: 'flowing forms, natural' },
+        { name: 'Contemporary impressionism', sub: 'painterly, atmospheric' },
+        { name: 'Mid-century modern', sub: 'retro, graphic, bold' },
+      ],
+      labelSize: 'Preferred poster size',
+      labelNote: 'Anything else?',
+      labelNoteOpt: '(optional)',
+      notePlaceholder: 'e.g. bedroom wall, living room, gift for someone...',
+      submitBtn: 'Get early access',
+      sending: 'Sending...',
+      formNote: "No spam. You'll be among the first to try the platform.",
+      successH2: "You're on the list.",
+      successP: "We'll be in touch as soon as early access opens.<br>Thank you for your interest.",
+      errorAlert: 'Something went wrong. Please try again.',
+    },
+    pl: {
+      pageTitle: 'PosterAI — Wczesny dostęp',
+      eyebrow: 'PosterAI — wczesny dostęp',
+      h1line1: 'Sztuka dla twoich',
+      h1em: 'pustych ścian.',
+      sub: 'Spersonalizowane plakaty tworzone przez AI — wybierz styl, wybierz nastrój, otrzymaj plik gotowy do druku. Bez umiejętności projektowania.',
+      labelEmail: 'Twój e-mail',
+      emailPlaceholder: 'imie@przyklad.pl',
+      emailError: 'Podaj prawidłowy adres e-mail.',
+      labelStyle: 'Styl, który cię najbardziej interesuje',
+      styles: [
+        { name: 'Malarstwo minimalistyczne', sub: 'czyste linie, negatywna przestrzeń' },
+        { name: 'Abstrakcja organiczna', sub: 'płynne formy, natura' },
+        { name: 'Współczesny impresjonizm', sub: 'malarski, atmosferyczny' },
+        { name: 'Mid-century modern', sub: 'retro, graficzny, odważny' },
+      ],
+      labelSize: 'Preferowany rozmiar plakatu',
+      labelNote: 'Coś jeszcze?',
+      labelNoteOpt: '(opcjonalnie)',
+      notePlaceholder: 'np. sypialnia, salon, prezent dla kogoś...',
+      submitBtn: 'Uzyskaj wczesny dostęp',
+      sending: 'Wysyłanie...',
+      formNote: 'Zero spamu. Będziesz wśród pierwszych, którzy wypróbują platformę.',
+      successH2: 'Jesteś na liście.',
+      successP: 'Odezwiemy się, gdy wczesny dostęp zostanie otwarty.<br>Dziękujemy za zainteresowanie.',
+      errorAlert: 'Coś poszło nie tak. Spróbuj ponownie.',
+    }
+  };
+
+  let currentLang = 'en';
+
+  function setLang(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+    document.documentElement.lang = lang;
+    document.title = t.pageTitle;
+    document.getElementById('eyebrow').textContent = t.eyebrow;
+    document.getElementById('h1-line1').textContent = t.h1line1;
+    document.getElementById('h1-em').textContent = t.h1em;
+    document.getElementById('sub').textContent = t.sub;
+    document.getElementById('label-email').childNodes[0].textContent = t.labelEmail + ' ';
+    document.getElementById('email').placeholder = t.emailPlaceholder;
+    document.getElementById('email-error').textContent = t.emailError;
+    document.getElementById('label-style').textContent = t.labelStyle;
+    document.querySelectorAll('.option-btn').forEach((btn, i) => {
+      btn.querySelector('.style-name').textContent = t.styles[i].name;
+      btn.querySelector('.style-sub').textContent = t.styles[i].sub;
+    });
+    document.getElementById('label-size').textContent = t.labelSize;
+    document.getElementById('label-note').childNodes[0].textContent = t.labelNote + ' ';
+    document.getElementById('label-note-opt').textContent = t.labelNoteOpt;
+    document.getElementById('note').placeholder = t.notePlaceholder;
+    const btn = document.getElementById('submit-btn');
+    if (!btn.disabled) btn.textContent = t.submitBtn;
+    document.getElementById('form-note').textContent = t.formNote;
+    document.getElementById('success-h2').textContent = t.successH2;
+    document.getElementById('success-p').innerHTML = t.successP;
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('lang-pl').classList.toggle('active', lang === 'pl');
+  }
+
   function selectStyle(el) {
     document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
@@ -453,7 +579,7 @@
 
     const btn = document.getElementById('submit-btn');
     btn.disabled = true;
-    btn.textContent = 'Sending...';
+    btn.textContent = translations[currentLang].sending;
 
     try {
       const formData = new FormData(this);
@@ -468,13 +594,13 @@
         document.getElementById('success-state').style.display = 'block';
       } else {
         btn.disabled = false;
-        btn.textContent = 'Get early access';
-        alert('Something went wrong. Please try again.');
+        btn.textContent = translations[currentLang].submitBtn;
+        alert(translations[currentLang].errorAlert);
       }
     } catch (err) {
       btn.disabled = false;
-      btn.textContent = 'Get early access';
-      alert('Something went wrong. Please try again.');
+      btn.textContent = translations[currentLang].submitBtn;
+      alert(translations[currentLang].errorAlert);
     }
   });
 </script>
