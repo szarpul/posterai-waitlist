@@ -289,7 +289,7 @@
   .poster-card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
 
   .poster-wrap {
@@ -308,11 +308,19 @@
   }
 
   .poster-caption {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .poster-meta {
     font-size: 10px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--text-faint);
-    font-weight: 400;
+    margin-top: 2px;
   }
 
   /* ── HOW IT WORKS ── */
@@ -714,28 +722,32 @@
       <div class="poster-wrap">
         <img src="/images/lighthouse.jpg" width="1067" height="1600" alt="Minimalizm malarski — latarnia morska, paleta Ocean Blues">
       </div>
-      <p class="poster-caption">Minimalizm malarski</p>
+      <p class="poster-caption">Latarnia morska</p>
+      <p class="poster-meta">Ocean Blues · minimalizm</p>
     </div>
 
     <div class="poster-card">
       <div class="poster-wrap">
         <img src="/images/earth-tones-horizon.jpg" width="1067" height="1600" loading="lazy" alt="Minimalizm malarski — horyzont o zmierzchu, paleta Earth Tones">
       </div>
-      <p class="poster-caption">Minimalizm malarski</p>
+      <p class="poster-caption">Horyzont o zmierzchu</p>
+      <p class="poster-meta">Earth Tones · minimalizm</p>
     </div>
 
     <div class="poster-card">
       <div class="poster-wrap">
         <img src="/images/warm-sunset-abstract.jpg" width="1067" height="1600" loading="lazy" alt="Abstrakcja organiczna — formy organiczne, paleta Warm Sunset">
       </div>
-      <p class="poster-caption">Abstrakcja organiczna</p>
+      <p class="poster-caption">Formy organiczne</p>
+      <p class="poster-meta">Warm Sunset · abstrakcja</p>
     </div>
 
     <div class="poster-card">
       <div class="poster-wrap">
         <img src="/images/monochrome-fog.jpg" width="1067" height="1600" loading="lazy" alt="Minimalizm malarski — mgła nad zamarzniętym jeziorem, paleta Monochrome">
       </div>
-      <p class="poster-caption">Minimalizm malarski</p>
+      <p class="poster-caption">Mgła nad jeziorem</p>
+      <p class="poster-meta">Monochrome · minimalizm</p>
     </div>
 
   </div>
