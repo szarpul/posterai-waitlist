@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PosterAI — Wczesny dostęp</title>
+<title>PosterAI — plakat dobrany do Twojego wnętrza</title>
+<meta name="description" content="Wybierz styl, kolory i motyw. Wygenerujemy propozycje plakatu, wydrukujemy i wyślemy. Wydruk A3 od 149 zł.">
+<meta property="og:title" content="PosterAI — plakat dobrany do Twojego wnętrza">
+<meta property="og:description" content="Wybierz styl, kolory i motyw. Wygenerujemy propozycje plakatu, wydrukujemy i wyślemy. Wydruk A3 od 149 zł.">
+<meta property="og:image" content="https://posterai-waitlist.vercel.app/images/lighthouse.jpg">
+<meta property="og:url" content="https://posterai-waitlist.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Epilogue:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -33,11 +42,37 @@
   .hero-section {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding: 5rem 1.5rem 4rem;
+  }
+
+  .hero-inner {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  @media (max-width: 860px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .hero-text {
+      align-items: center;
+      text-align: center;
+    }
   }
 
   .eyebrow {
@@ -130,6 +165,72 @@
     text-decoration-color: var(--text);
   }
 
+  .hero-price {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-faint);
+    letter-spacing: 0.02em;
+    margin-bottom: 1.75rem;
+  }
+
+  /* ── HERO VISUAL: poster-on-wall mockup ── */
+  .hero-visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .poster-mockup {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .wall-block {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 16px;
+    background: #e8e2d8;
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.05) 100%);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 9% 0 15%;
+    overflow: hidden;
+  }
+
+  .poster-frame {
+    width: 55%;
+    aspect-ratio: 2 / 3;
+    background: #1a1a18;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.30), 0 4px 10px rgba(0,0,0,0.16);
+  }
+
+  .poster-mat {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    padding: 6px;
+  }
+
+  .poster-mat img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .wall-shelf {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 13%;
+    height: 1px;
+    background: rgba(26,26,24,0.14);
+  }
+
   /* ── GALLERY ── */
   .gallery-section {
     padding: 5rem 1.5rem;
@@ -143,7 +244,7 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--text-faint);
-    margin-bottom: 2.5rem;
+    margin-bottom: 0.875rem;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -156,6 +257,15 @@
     height: 0.5px;
     background: var(--text-faint);
     flex-shrink: 0;
+  }
+
+  .section-note {
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 520px;
+    margin-bottom: 2.5rem;
   }
 
   .gallery-grid {
@@ -566,35 +676,46 @@
 
 <!-- ── HERO ── -->
 <section class="hero-section">
-  <p class="eyebrow">PosterAI</p>
-  <h1>Sztuka na <em>Twoje ściany.</em></h1>
-  <p class="hero-sub">Wybierz styl i nastrój. Otrzymaj plik gotowy do druku. Zero umiejętności graficznych, zero promptów.</p>
-  <a href="#form" class="cta-btn">Dołącz do early access</a>
-  <a href="#gallery" class="scroll-hint">↓ Zobacz przykłady</a>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow">PosterAI</p>
+      <h1>Plakat dobrany do <em>Twojego wnętrza.</em></h1>
+      <p class="hero-sub">Wybierz styl, kolory i motyw w krótkim kwestionariuszu. Wygenerujemy kilka propozycji, a wybraną wydrukujemy i wyślemy pod Twoje drzwi.</p>
+      <a href="#form" class="cta-btn">Zaprojektuj swój plakat</a>
+      <p class="hero-price">Wydruk A3 od 149 zł · A2 od 199 zł · wysyłka w cenie</p>
+      <a href="#gallery" class="scroll-hint">↓ Zobacz przykłady</a>
+    </div>
+    <div class="hero-visual">
+      <div class="poster-mockup">
+        <div class="wall-block">
+          <div class="poster-frame">
+            <div class="poster-mat">
+              <img src="/images/lighthouse.jpg" width="1067" height="1600" alt="Plakat PosterAI na ścianie — latarnia morska">
+            </div>
+          </div>
+          <div class="wall-shelf"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ── GALLERY ── -->
 <section class="gallery-section" id="gallery">
-  <p class="section-label">Wygenerowane przykłady</p>
+  <p class="section-label">Wygenerowane przykłady — wybrane style</p>
+  <p class="section-note">Trzy z czterech dostępnych stylów. Impresjonizm współczesny i mid-century modern wkrótce w galerii.</p>
   <div class="gallery-grid">
 
     <div class="poster-card">
       <div class="poster-wrap">
-        <img src="/images/earth-tones-horizon.jpg" width="1067" height="1600" alt="Minimalizm malarski — horyzont o zmierzchu, paleta Earth Tones">
+        <img src="/images/lighthouse.jpg" width="1067" height="1600" alt="Minimalizm malarski — latarnia morska, paleta Ocean Blues">
       </div>
       <p class="poster-caption">Minimalizm malarski</p>
     </div>
 
     <div class="poster-card">
       <div class="poster-wrap">
-        <img src="/images/lighthouse.jpg" width="1067" height="1600" loading="lazy" alt="Minimalizm malarski — latarnia morska, paleta Ocean Blues">
-      </div>
-      <p class="poster-caption">Minimalizm malarski</p>
-    </div>
-
-    <div class="poster-card">
-      <div class="poster-wrap">
-        <img src="/images/monochrome-fog.jpg" width="1067" height="1600" loading="lazy" alt="Minimalizm malarski — mgła nad zamarzniętym jeziorem, paleta Monochrome">
+        <img src="/images/earth-tones-horizon.jpg" width="1067" height="1600" loading="lazy" alt="Minimalizm malarski — horyzont o zmierzchu, paleta Earth Tones">
       </div>
       <p class="poster-caption">Minimalizm malarski</p>
     </div>
@@ -604,6 +725,13 @@
         <img src="/images/warm-sunset-abstract.jpg" width="1067" height="1600" loading="lazy" alt="Abstrakcja organiczna — formy organiczne, paleta Warm Sunset">
       </div>
       <p class="poster-caption">Abstrakcja organiczna</p>
+    </div>
+
+    <div class="poster-card">
+      <div class="poster-wrap">
+        <img src="/images/monochrome-fog.jpg" width="1067" height="1600" loading="lazy" alt="Minimalizm malarski — mgła nad zamarzniętym jeziorem, paleta Monochrome">
+      </div>
+      <p class="poster-caption">Minimalizm malarski</p>
     </div>
 
   </div>
@@ -616,17 +744,17 @@
     <div class="step">
       <span class="step-num">01</span>
       <h3>Wybierz styl</h3>
-      <p>Minimalizm, abstrakcja, impresjonizm — wybierz estetykę, która pasuje do Twojego wnętrza.</p>
+      <p>Minimalizm, abstrakcja, impresjonizm lub mid-century — estetyka dopasowana do Twojego wnętrza.</p>
     </div>
     <div class="step">
       <span class="step-num">02</span>
-      <h3>Wybierz nastrój</h3>
-      <p>Spokojny, energetyczny, nostalgiczny — określ emocje, które plakat ma wywoływać.</p>
+      <h3>Wybierz kolory i motyw</h3>
+      <p>Siedem palet kolorów i motywy dobrane do stylu. Kilka kliknięć, zero promptów.</p>
     </div>
     <div class="step">
       <span class="step-num">03</span>
-      <h3>Pobierz plik</h3>
-      <p>Otrzymujesz plik w wysokiej rozdzielczości, gotowy do wydruku w dowolnym formacie.</p>
+      <h3>Odbierz wydruk</h3>
+      <p>Wybierasz jedną z propozycji. Drukujemy na papierze artystycznym i wysyłamy pod Twoje drzwi.</p>
     </div>
   </div>
 </section>
@@ -634,11 +762,13 @@
 <!-- ── FORM ── -->
 <section class="form-section" id="form">
   <div class="form-container">
+    <!-- "Wolisz zacząć od razu? → Zaprojektuj swój plakat" link hidden: QUESTIONNAIRE_URL is empty.
+         Once set, add here: <a href="QUESTIONNAIRE_URL" target="_blank" class="skip-to-questionnaire">Wolisz zacząć od razu? → Zaprojektuj swój plakat</a> -->
     <div id="form-state">
       <div class="card">
-        <p class="card-eyebrow">PosterAI — wczesny dostęp</p>
-        <h1>Dołącz do early access.</h1>
-        <p class="sub">Bądź wśród pierwszych którzy wypróbują PosterAI.</p>
+        <p class="card-eyebrow">PosterAI — pierwsze zamówienia</p>
+        <h1>Wolisz, żebyśmy się odezwali?</h1>
+        <p class="sub">Zostaw e-mail i wybierz styl — napiszemy do Ciebie z propozycją plakatu.</p>
         <div class="divider"></div>
 
         <form id="pa-form" action="https://formspree.io/f/xvzwbdbr" method="POST">
@@ -697,8 +827,8 @@
             </div>
           </div>
 
-          <button type="submit" class="submit-btn" id="submit-btn">Dołącz do early access</button>
-          <p class="note">Bez spamu. Odezwiemy się gdy platforma ruszy.</p>
+          <button type="submit" class="submit-btn" id="submit-btn">Poproś o propozycję</button>
+          <p class="note">Bez spamu. Odpowiadamy w ciągu 48 godzin.</p>
         </form>
       </div>
     </div>
@@ -708,8 +838,8 @@
         <div class="success-icon">
           <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <h2>Jesteś na liście.</h2>
-        <p>Odezwiemy się gdy early access się otworzy. Dziękujemy za zainteresowanie.</p>
+        <h2>Dziękujemy.</h2>
+        <p>Odezwiemy się w ciągu 48 godzin z pierwszą propozycją.</p>
       </div>
     </div>
   </div>
@@ -758,12 +888,12 @@
         document.getElementById('success-state').style.display = 'block';
       } else {
         btn.disabled = false;
-        btn.textContent = 'Dołącz do early access';
+        btn.textContent = 'Poproś o propozycję';
         alert('Coś poszło nie tak. Spróbuj ponownie.');
       }
     } catch (err) {
       btn.disabled = false;
-      btn.textContent = 'Dołącz do early access';
+      btn.textContent = 'Poproś o propozycję';
       alert('Coś poszło nie tak. Spróbuj ponownie.');
     }
   });
@@ -776,5 +906,6 @@
     });
   });
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
