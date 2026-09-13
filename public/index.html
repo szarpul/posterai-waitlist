@@ -680,7 +680,7 @@
     <div class="hero-text">
       <p class="eyebrow">PosterAI</p>
       <h1>Plakat dobrany do <em>Twojego wnętrza.</em></h1>
-      <p class="hero-sub">Wybierz styl, kolory i motyw w krótkim kwestionariuszu. Wygenerujemy kilka propozycji, a wybraną wydrukujemy i wyślemy pod Twoje drzwi.</p>
+      <p class="hero-sub">Wybierz styl i rozmiar, a o kolory i wnętrze dopytamy mailem. Wygenerujemy kilka propozycji, a wybraną wydrukujemy i wyślemy pod Twoje drzwi.</p>
       <a href="#form" class="cta-btn">Zaprojektuj swój plakat</a>
       <p class="hero-price">Wydruk A3 od 149 zł · A2 od 199 zł · wysyłka w cenie</p>
       <a href="#gallery" class="scroll-hint">↓ Zobacz przykłady</a>
@@ -749,7 +749,7 @@
     <div class="step">
       <span class="step-num">02</span>
       <h3>Wybierz kolory i motyw</h3>
-      <p>Siedem palet kolorów i motywy dobrane do stylu. Kilka kliknięć, zero promptów.</p>
+      <p>Siedem palet kolorów i motywy dobrane do stylu — ustalimy je razem w krótkiej wymianie maili.</p>
     </div>
     <div class="step">
       <span class="step-num">03</span>
@@ -762,13 +762,11 @@
 <!-- ── FORM ── -->
 <section class="form-section" id="form">
   <div class="form-container">
-    <!-- "Wolisz zacząć od razu? → Zaprojektuj swój plakat" link hidden: QUESTIONNAIRE_URL is empty.
-         Once set, add here: <a href="QUESTIONNAIRE_URL" target="_blank" class="skip-to-questionnaire">Wolisz zacząć od razu? → Zaprojektuj swój plakat</a> -->
     <div id="form-state">
       <div class="card">
         <p class="card-eyebrow">PosterAI — pierwsze zamówienia</p>
-        <h1>Wolisz, żebyśmy się odezwali?</h1>
-        <p class="sub">Zostaw e-mail i wybierz styl — napiszemy do Ciebie z propozycją plakatu.</p>
+        <h1>Zacznijmy od Twojego wnętrza.</h1>
+        <p class="sub">Zostaw e-mail, wybierz styl i rozmiar. W ciągu 48 godzin napiszemy z kilkoma pytaniami, a potem wyślemy propozycje.</p>
         <div class="divider"></div>
 
         <form id="pa-form" action="https://formspree.io/f/xvzwbdbr" method="POST">
@@ -811,11 +809,9 @@
           <div class="field">
             <label>Preferowany rozmiar plakatu</label>
             <div class="size-row">
-              <button type="button" class="size-btn" data-val="A4" onclick="selectSize(this)">A4</button>
               <button type="button" class="size-btn" data-val="A3" onclick="selectSize(this)">A3</button>
               <button type="button" class="size-btn" data-val="A2" onclick="selectSize(this)">A2</button>
               <button type="button" class="size-btn" data-val="50×70 cm" onclick="selectSize(this)">50×70 cm</button>
-              <button type="button" class="size-btn" data-val="70×100 cm" onclick="selectSize(this)">70×100 cm</button>
             </div>
             <input type="hidden" name="size" id="size-val" value="" />
           </div>
@@ -839,7 +835,7 @@
           <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <h2>Dziękujemy.</h2>
-        <p>Odezwiemy się w ciągu 48 godzin z pierwszą propozycją.</p>
+        <p>W ciągu 48 godzin dostaniesz od nas maila z kilkoma pytaniami o wnętrze, a zaraz potem pierwsze propozycje.</p>
       </div>
     </div>
   </div>
